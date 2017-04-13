@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginRegistrationViewController: UIViewController {
     
+    var user: FIRUser?
+    var databaseReference: FIRDatabaseReference!
+    
     // MARK: View Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = .white
         setupViewHierarchy()
         configureConstraints()
@@ -56,7 +60,7 @@ class LoginRegistrationViewController: UIViewController {
     // MARK: Lazy Instantiation
     
     lazy var emailTextField: UITextField = {
-       let tf = UITextField()
+        let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.autocapitalizationType = .none
         tf.autocorrectionType = .no
@@ -65,7 +69,7 @@ class LoginRegistrationViewController: UIViewController {
     }()
     
     lazy var passwordTextField: UITextField = {
-       let tf = UITextField()
+        let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.autocapitalizationType = .none
         tf.autocorrectionType = .no
@@ -78,26 +82,127 @@ class LoginRegistrationViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Login", for: .normal)
         button.setTitleColor(UIColor.blue, for: .normal)
-        button.addTarget(self, action: #selector(loginButtonPressed(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(loginExistingUser(_:)), for: .touchUpInside)
         return button
     }()
     
     lazy var registerButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Register", for: .normal)
         button.setTitleColor(UIColor.blue, for: .normal)
-        button.addTarget(self, action: #selector(registerButtonPressed(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(registerNewUser(_:)), for: .touchUpInside)
         return button
     }()
     
     // MARK: Target Action Methods
     
-    func loginButtonPressed(_ sender: UIButton) {
+    func loginExistingUser(_ sender: UIButton) {
         print("LOGIN PRESSED")
+        if emailTextField.text == "" || self.passwordTextField.text == "" {
+            let alertController = UIAlertController(title: "Missing Email and Password", message: "Please fill in all fields", preferredStyle: .alert)
+            
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            
+            alertController.addAction(okayAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        } else if emailTextField.text == "" {
+            let alertController = UIAlertController(title: "Enter email", message: "Please enter email to continue", preferredStyle: .alert)
+            
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            
+            alertController.addAction(okayAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }  else if (self.passwordTextField.text?.characters.count)! < 5{
+            let alertController = UIAlertController(title: "Password too short", message: "Must be at least 5 characters", preferredStyle: .alert)
+            
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            
+            alertController.addAction(okayAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            FIRAuth.auth()?.signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user: FIRUser?, error: Error?) in
+                if error != nil {
+                    let alertController = UIAlertController(title: "Error Logging In", message: "Please try again", preferredStyle: .alert)
+                    
+                    let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                    
+                    alertController.addAction(okayAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    self.user = user!
+                    self.presentMainApp()
+                }
+            })
+        }
+        
     }
     
-    func registerButtonPressed(_ sender: UIButton) {
+    func registerNewUser(_ sender: UIButton) {
         print("REGISTER PRESSED")
+        //Check for non nil values in both text fields
+        if emailTextField.text == "" || self.passwordTextField.text == "" {
+            let alertController = UIAlertController(title: "Missing Email and Password", message: "Please fill in all fields", preferredStyle: .alert)
+            
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            
+            alertController.addAction(okayAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            
+        } else if emailTextField.text == "" {
+            let alertController = UIAlertController(title: "Enter email", message: "Please enter email to continue", preferredStyle: .alert)
+            
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            
+            alertController.addAction(okayAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }  else if (self.passwordTextField.text?.characters.count)! < 5{
+            let alertController = UIAlertController(title: "Password too short", message: "Must be at least 5 characters", preferredStyle: .alert)
+            
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            
+            alertController.addAction(okayAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user: FIRUser?, error: Error?) in
+                if error != nil {
+                    print("ERROR CREATING USER: \(error)")
+                    
+                    let alertController = UIAlertController(title: "Error Creating Account", message: "Please try again", preferredStyle: .alert)
+                    
+                    let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                    
+                    alertController.addAction(okayAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    print("SUCCESSFULLY REGISTERED USER: \(user!.email!)")
+                }
+                
+            })
+        }
+    }
+    
+    func presentMainApp() {
+ 
+        let feedController = UINavigationController(rootViewController: FeedViewController())
+        let uploadController = UINavigationController(rootViewController: UploadViewController())
+        
+        let tabBarController = UITabBarController()
+        let controllers = [feedController, uploadController]
+        tabBarController.viewControllers = controllers
+        
+        feedController.tabBarItem = UITabBarItem(title: "First", image: #imageLiteral(resourceName: "first"), tag: 0)
+        uploadController.tabBarItem = UITabBarItem(title: "Second", image: #imageLiteral(resourceName: "second"), tag: 1)
+        
+        self.present(tabBarController, animated: true, completion: nil)
     }
 }

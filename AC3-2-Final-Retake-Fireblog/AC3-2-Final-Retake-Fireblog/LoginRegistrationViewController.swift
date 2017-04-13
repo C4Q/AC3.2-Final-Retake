@@ -11,6 +11,8 @@ import Firebase
 
 class LoginRegistrationViewController: UIViewController {
     
+    // MARK: Stored Properties
+    
     var user: FIRUser?
     var databaseReference: FIRDatabaseReference!
     
@@ -140,7 +142,6 @@ class LoginRegistrationViewController: UIViewController {
                 }
             })
         }
-        
     }
     
     func registerNewUser(_ sender: UIButton) {
@@ -192,7 +193,6 @@ class LoginRegistrationViewController: UIViewController {
     }
     
     func presentMainApp() {
- 
         let feedController = UINavigationController(rootViewController: FeedViewController())
         let uploadController = UINavigationController(rootViewController: UploadViewController())
         

@@ -7,32 +7,40 @@
 //
 
 import UIKit
+import Firebase
 
 class FeedViewController: UIViewController {
+    
+    fileprivate var _authHandle: FIRAuthStateDidChangeListenerHandle!
+    var user: FIRUser?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = .white
-        
 
-        // Do any additional setup after loading the view.
+        checkForLoggedInUser()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func checkForLoggedInUser() {
+        _authHandle = FIRAuth.auth()?.addStateDidChangeListener({ (auth: FIRAuth?, user: FIRUser?) in
+            if let activeUser = user {
+               self.user = activeUser
+                //Add logout button to nav bar
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(self.logOutUser(_:)))
+            }
+        })
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func logOutUser(_ sender: UIBarButtonItem) {
+        if FIRAuth.auth()?.currentUser != nil {
+            do {
+                try FIRAuth.auth()?.signOut()
+                let loginController = LoginRegistrationViewController()
+                self.present(loginController, animated: true, completion: nil)
+            }
+            catch let error as NSError {
+                print("ERROR \(error.localizedDescription)")
+            }
+        }
     }
-    */
-
 }

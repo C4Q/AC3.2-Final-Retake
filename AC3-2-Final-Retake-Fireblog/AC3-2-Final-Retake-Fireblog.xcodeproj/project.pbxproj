@@ -14,6 +14,8 @@
 		3A69369B1E9FCA9D006F7355 /* LoginRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69369A1E9FCA9D006F7355 /* LoginRegistrationViewController.swift */; };
 		3A69369D1E9FCBCA006F7355 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69369C1E9FCBCA006F7355 /* FeedViewController.swift */; };
 		3A69369F1E9FCBE0006F7355 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A69369E1E9FCBE0006F7355 /* UploadViewController.swift */; };
+		3A6936A11E9FE12C006F7355 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6936A01E9FE12C006F7355 /* FeedTableViewCell.swift */; };
+		3A6936A31E9FE200006F7355 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6936A21E9FE200006F7355 /* Post.swift */; };
 		7FD98143E2C8A73ADCA53FC5 /* Pods_AC3_2_Final_Retake_Fireblog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F68DDAE78396FFCADF770A4 /* Pods_AC3_2_Final_Retake_Fireblog.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +30,8 @@
 		3A69369A1E9FCA9D006F7355 /* LoginRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRegistrationViewController.swift; sourceTree = "<group>"; };
 		3A69369C1E9FCBCA006F7355 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		3A69369E1E9FCBE0006F7355 /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		3A6936A01E9FE12C006F7355 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		3A6936A21E9FE200006F7355 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		8DF390965915B6D28B9BC94E /* Pods-AC3-2-Final-Retake-Fireblog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3-2-Final-Retake-Fireblog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AC3-2-Final-Retake-Fireblog/Pods-AC3-2-Final-Retake-Fireblog.debug.xcconfig"; sourceTree = "<group>"; };
 		AC99124C653DF8A077A82073 /* Pods-AC3-2-Final-Retake-Fireblog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3-2-Final-Retake-Fireblog.release.xcconfig"; path = "Pods/Target Support Files/Pods-AC3-2-Final-Retake-Fireblog/Pods-AC3-2-Final-Retake-Fireblog.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +70,7 @@
 		1E3BD1731E9FB52F00690EEB /* AC3-2-Final-Retake-Fireblog */ = {
 			isa = PBXGroup;
 			children = (
+				3A6936A41E9FE207006F7355 /* Model */,
 				3A6936971E9FC8A0006F7355 /* Controllers */,
 				3A6936991E9FC8DF006F7355 /* Views */,
 			);
@@ -98,8 +103,17 @@
 		3A6936991E9FC8DF006F7355 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A6936A01E9FE12C006F7355 /* FeedTableViewCell.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		3A6936A41E9FE207006F7355 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A6936A21E9FE200006F7355 /* Post.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		7497DBEDE96E7E6FBDC1BA4F /* Frameworks */ = {
@@ -245,7 +259,9 @@
 				1E3BD1751E9FB52F00690EEB /* AppDelegate.swift in Sources */,
 				3A69369F1E9FCBE0006F7355 /* UploadViewController.swift in Sources */,
 				3A69369D1E9FCBCA006F7355 /* FeedViewController.swift in Sources */,
+				3A6936A31E9FE200006F7355 /* Post.swift in Sources */,
 				3A69369B1E9FCA9D006F7355 /* LoginRegistrationViewController.swift in Sources */,
+				3A6936A11E9FE12C006F7355 /* FeedTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

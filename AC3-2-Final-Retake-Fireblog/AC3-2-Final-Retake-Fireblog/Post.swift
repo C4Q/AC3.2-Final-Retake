@@ -11,11 +11,11 @@ import Foundation
 class Post {
     var madeByUserWithEmail: String
     var type: String
-    var timestamp: Int
+    var timestamp: Double
     var postID: String //used as storage key for images
     var text: String?
     
-    init(email: String, type: String, timestamp: Int, postID: String, text: String?) {
+    init(email: String, type: String, timestamp: Double, postID: String, text: String?) {
         self.madeByUserWithEmail = email
         self.type = type
         self.timestamp = timestamp

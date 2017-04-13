@@ -1,6 +1,6 @@
 //
 //  FeedViewController.swift
-//  
+//
 //
 //  Created by Erica Y Stevens on 4/13/17.
 //
@@ -15,17 +15,19 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     fileprivate var _authHandle: FIRAuthStateDidChangeListenerHandle!
     fileprivate var _refHandle: FIRDatabaseHandle!
+    fileprivate var _storageHandle: FIRStorageHandle!
     var databaseReference: FIRDatabaseReference!
+    var storageReference: FIRStorageReference!
     var user: FIRUser?
     var postInfoFromDatabase = [String:[String:Any]]()
     var posts = [Post]()
     
     // MARK: View Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-
+        
         checkForLoggedInUser()
         setupViewHiearchy()
         configureConstraints()
@@ -41,7 +43,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: View Hierarchy and Constraints
     
     func setupViewHiearchy() {
-       self.view.addSubview(tableView)
+        self.view.addSubview(tableView)
     }
     
     func configureConstraints() {
@@ -50,7 +52,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             tableView.heightAnchor.constraint(equalTo: self.view.heightAnchor),
             tableView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             tableView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        ].map{ $0.isActive = true }
+            ].map{ $0.isActive = true }
     }
     
     // MARK: TableView Configuration
@@ -59,15 +61,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: "FeedCell")
+        self.tableView.estimatedRowHeight = 100
+        self.tableView.rowHeight = UITableViewAutomaticDimension
     }
-
+    
     // MARK: Firebase
     
     func checkForLoggedInUser() {
         _authHandle = FIRAuth.auth()?.addStateDidChangeListener({ (auth: FIRAuth?, user: FIRUser?) in
             if let activeUser = user {
-               self.user = activeUser
-                //Add logout button to nav bar
+                self.user = activeUser
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(self.logOutUser(_:)))
             }
         })
@@ -88,7 +91,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func getPostsFromDatabase(completion: @escaping ([String:[String:Any]]) -> ()) {
         databaseReference = FIRDatabase.database().reference(fromURL: "https://ac-32-final-retake.firebaseio.com/")
-
+        
         _refHandle = databaseReference.observe(.childAdded, with: { (snapshot) in
             
             if let postsDict = snapshot.value as? [String:Any] {
@@ -106,9 +109,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         var posts = [Post]()
         
         for (key, value) in infoDict {
-            print("POST INFO: \(value)")
             if let email = value["email"] as? String,
-                let timestamp = value["timestamp"] as? Int,
+                let timestamp = value["timestamp"] as? Double,
                 let type = value["type"] as? String,
                 let text = value["text"] as? String? {
                 
@@ -122,7 +124,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: Lazy Instantiation
     
     lazy var tableView: UITableView = {
-       let tv = UITableView()
+        let tv = UITableView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
@@ -130,13 +132,87 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: TableView Data Source Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return self.posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedTableViewCell
         
+        let post = posts[indexPath.row]
+        
+        cell.userEmailLabel.text = post.madeByUserWithEmail
+        
+        let timeInterval = TimeInterval(post.timestamp)
+        let dateFromTimeInterval = NSDate(timeIntervalSinceReferenceDate: timeInterval)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d/yy, h:mm a"
+        
+        let postDateString = dateFormatter.string(from: dateFromTimeInterval as Date)
+        cell.timestampLabel.text = postDateString
+        
+        switch post.type {
+        case PostType.text.rawValue:
+            cell.contentView.addSubview(cell.postTextLabel)
+            
+            let _ = [
+                cell.postTextLabel.widthAnchor.constraint(equalTo: cell.contentView.widthAnchor, multiplier: 0.6),
+                cell.postTextLabel.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 8.0),
+                cell.postTextLabel.leadingAnchor.constraint(equalTo: cell.userEmailLabel.trailingAnchor, constant: 8.0),
+                cell.postTextLabel.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -8.0),
+                cell.postTextLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -8.0)
+                ].map{ $0.isActive = true }
+            
+            if let postText = post.text {
+                cell.postTextLabel.text = postText
+            }
+        case PostType.image.rawValue:
+            cell.contentView.addSubview(cell.postImageView)
+            
+            let _ = [
+                cell.postImageView.widthAnchor.constraint(equalTo: cell.contentView.widthAnchor, multiplier: 0.6),
+                cell.postImageView.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 8.0),
+                cell.postImageView.leadingAnchor.constraint(equalTo: cell.userEmailLabel.trailingAnchor, constant: 8.0),
+                cell.postImageView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -8.0),
+                cell.postImageView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -8.0)
+                ].map{ $0.isActive = true }
+           
+           getPostImageFromStorage(post.postID, completion: { (image) in
+            DispatchQueue.main.async {
+                cell.postImageView.image = image
+                self.tableView.reloadData()
+            }
+           })
+        default:
+            break
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func getPostImageFromStorage(_ key: String, completion: @escaping (UIImage) -> ()) {
+
+        storageReference = FIRStorage.storage().reference(forURL: "gs://ac-32-final-retake.appspot.com/")
+        
+        let imagesRef = storageReference.child("images/")
+        
+        let postImageRef = imagesRef.child("\(key)")
+        
+        postImageRef.downloadURL { (url: URL?, error: Error?) in
+            if error != nil {
+                print("ERROR DOWNLOADING POST IMAGE: \(error!)")
+            }
+            
+            if let validData = NSData(contentsOf: url!) {
+                if let image = UIImage(data: validData as Data) {
+                    completion(image)
+                }
+            } else {
+                print("UNABLE TO CONVER IMAGE INTO DATA")
+            }
+        }
     }
 }

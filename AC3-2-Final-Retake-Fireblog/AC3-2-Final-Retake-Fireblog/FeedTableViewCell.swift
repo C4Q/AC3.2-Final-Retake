@@ -22,12 +22,6 @@ class FeedTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    
     func setupViewHierarchy() {
         self.contentView.addSubview(userEmailLabel)
         self.contentView.addSubview(timestampLabel)
@@ -37,16 +31,12 @@ class FeedTableViewCell: UITableViewCell {
         let _ = [
             userEmailLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8.0),
             userEmailLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8.0),
-//            userEmailLabel.heightAnchor.constraint(equalToConstant: 30),
             userEmailLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.4),
-//            userEmailLabel.bottomAnchor.constraint(equalTo: timestampLabel.topAnchor),
+            userEmailLabel.bottomAnchor.constraint(equalTo: timestampLabel.topAnchor, constant: -8.0),
             
             timestampLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.4),
-//            timestampLabel.heightAnchor.constraint(equalToConstant: 30),
             timestampLabel.topAnchor.constraint(equalTo: userEmailLabel.bottomAnchor, constant: 8.0),
-            timestampLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8.0),
-            timestampLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0)
-            
+            timestampLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8.0)
         ].map{ $0.isActive = true }
         
     }

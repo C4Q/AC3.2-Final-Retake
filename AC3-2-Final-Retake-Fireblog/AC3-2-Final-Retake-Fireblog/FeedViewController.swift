@@ -65,6 +65,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: "FeedCell")
         self.tableView.estimatedRowHeight = 100
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.separatorStyle = .none
     }
     
     // MARK: Firebase
@@ -191,7 +192,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 ].map{ $0.isActive = true }
             
             if let postText = post.text {
-                cell.postTextLabel.text = postText
+                cell.postTextLabel.text = "\(postText)\n"
             }
         }
         

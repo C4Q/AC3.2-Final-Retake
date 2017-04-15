@@ -34,8 +34,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         configureTableView()
         getPostsFromDatabase { (postInfoDict) in
             DispatchQueue.main.async {
-                self.posts = self.buildPostObjectsFromDatabaseInfo(postInfoDict)
-                self.tableView.reloadData()
+                self.buildPostObjectsFromDatabaseInfo(postInfoDict, completion: { (post) in
+                    self.posts.append(post)
+                    self.tableView.reloadData()
+                })
             }
         }
     }
@@ -105,8 +107,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         })
     }
     
-    func buildPostObjectsFromDatabaseInfo(_ infoDict: [String:[String:Any]]) -> [Post] {
-        var posts = [Post]()
+    func buildPostObjectsFromDatabaseInfo(_ infoDict: [String:[String:Any]], completion: @escaping (Post) -> ())  {
         
         for (key, value) in infoDict {
             if let email = value["email"] as? String,
@@ -114,12 +115,37 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let type = value["type"] as? String,
                 let text = value["text"] as? String? {
                 
-                let post = Post(email: email, type: type, timestamp: timestamp, postID: key, text: text)
-                posts.append(post)
+                
+                switch type {
+                case type where type == PostType.text.rawValue:
+                    let textPost = Post(email: email, type: type, timestamp: timestamp, postID: key, text: text, image: nil)
+                    completion(textPost)
+                case type where type == PostType.image.rawValue:
+                    self.getPostImageFromStorage(key) { (image) in
+                        let imagePost = Post(email: email, type: type, timestamp: timestamp, postID: key, text: nil, image: image)
+                        completion(imagePost)
+                    }
+                default:
+                    continue
+                }
             }
         }
-        return posts
     }
+    
+    func getPostImageFromStorage(_ key: String, completion: @escaping (UIImage) -> ()) {
+        
+        storageReference = FIRStorage.storage().reference(forURL: "gs://ac-32-final-retake.appspot.com/").child("images/").child("\(key)")
+        
+        storageReference.data(withMaxSize: 1 * 1024 * 1024) { (data, error) in
+            if error != nil {
+                print("ERROR DOWNLOADING IMAGE: \(error!.localizedDescription)")
+            }
+            if let postImage = UIImage(data: data!) {
+                completion(postImage)
+            }
+        }.resume()
+    }
+    
     
     // MARK: Lazy Instantiation
     
@@ -132,13 +158,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: TableView Data Source Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.posts.count
+        let postsSortedByDate = self.posts.sorted() { $0.timestamp > $1.timestamp}
+        return postsSortedByDate.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedTableViewCell
+        let postsSortedByDate = self.posts.sorted() { $0.timestamp > $1.timestamp}
         
-        let post = posts[indexPath.row]
+        let post = postsSortedByDate[indexPath.row]
         
         cell.userEmailLabel.text = post.madeByUserWithEmail
         
@@ -151,14 +179,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let postDateString = dateFormatter.string(from: dateFromTimeInterval as Date)
         cell.timestampLabel.text = postDateString
         
-        switch post.type {
-        case PostType.text.rawValue:
+        if post.type == PostType.text.rawValue {
+            cell.postImageView.removeFromSuperview()
             cell.contentView.addSubview(cell.postTextLabel)
             
             let _ = [
                 cell.postTextLabel.widthAnchor.constraint(equalTo: cell.contentView.widthAnchor, multiplier: 0.6),
                 cell.postTextLabel.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 8.0),
-                cell.postTextLabel.leadingAnchor.constraint(equalTo: cell.userEmailLabel.trailingAnchor, constant: 8.0),
                 cell.postTextLabel.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -8.0),
                 cell.postTextLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -8.0)
                 ].map{ $0.isActive = true }
@@ -166,53 +193,27 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let postText = post.text {
                 cell.postTextLabel.text = postText
             }
-        case PostType.image.rawValue:
+        }
+        
+        if post.type == PostType.image.rawValue {
+            cell.postTextLabel.removeFromSuperview()
             cell.contentView.addSubview(cell.postImageView)
             
             let _ = [
                 cell.postImageView.widthAnchor.constraint(equalTo: cell.contentView.widthAnchor, multiplier: 0.6),
                 cell.postImageView.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 8.0),
-                cell.postImageView.leadingAnchor.constraint(equalTo: cell.userEmailLabel.trailingAnchor, constant: 8.0),
                 cell.postImageView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -8.0),
                 cell.postImageView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -8.0)
                 ].map{ $0.isActive = true }
-           
-           getPostImageFromStorage(post.postID, completion: { (image) in
-            DispatchQueue.main.async {
-                cell.postImageView.image = image
-                self.tableView.reloadData()
+            
+            if let postImage = post.image {
+                cell.postImageView.image = postImage
             }
-           })
-        default:
-            break
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
-    }
-    
-    func getPostImageFromStorage(_ key: String, completion: @escaping (UIImage) -> ()) {
-
-        storageReference = FIRStorage.storage().reference(forURL: "gs://ac-32-final-retake.appspot.com/")
-        
-        let imagesRef = storageReference.child("images/")
-        
-        let postImageRef = imagesRef.child("\(key)")
-        
-        postImageRef.downloadURL { (url: URL?, error: Error?) in
-            if error != nil {
-                print("ERROR DOWNLOADING POST IMAGE: \(error!)")
-            }
-            
-            if let validData = NSData(contentsOf: url!) {
-                if let image = UIImage(data: validData as Data) {
-                    completion(image)
-                }
-            } else {
-                print("UNABLE TO CONVER IMAGE INTO DATA")
-            }
-        }
     }
 }

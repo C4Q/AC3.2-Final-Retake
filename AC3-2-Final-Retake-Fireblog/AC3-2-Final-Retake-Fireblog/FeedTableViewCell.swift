@@ -27,6 +27,7 @@ class FeedTableViewCell: UITableViewCell {
         // Initialization code
     }
     
+    
     func setupViewHierarchy() {
         self.contentView.addSubview(userEmailLabel)
         self.contentView.addSubview(timestampLabel)
@@ -36,12 +37,12 @@ class FeedTableViewCell: UITableViewCell {
         let _ = [
             userEmailLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8.0),
             userEmailLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8.0),
-            userEmailLabel.heightAnchor.constraint(equalToConstant: 30),
+//            userEmailLabel.heightAnchor.constraint(equalToConstant: 30),
             userEmailLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.4),
 //            userEmailLabel.bottomAnchor.constraint(equalTo: timestampLabel.topAnchor),
             
             timestampLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.4),
-            timestampLabel.heightAnchor.constraint(equalToConstant: 30),
+//            timestampLabel.heightAnchor.constraint(equalToConstant: 30),
             timestampLabel.topAnchor.constraint(equalTo: userEmailLabel.bottomAnchor, constant: 8.0),
             timestampLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8.0),
             timestampLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8.0)

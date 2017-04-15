@@ -165,8 +165,12 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
             "text" : "",
             "timestamp" : NSDate.timeIntervalSinceReferenceDate,
             "type": PostType.image.rawValue])
-        showUploadSuccessAlert()
         
+        showUploadSuccessAlert()
+        let feedController = FeedViewController()
+        DispatchQueue.main.async {
+            feedController.tableView.reloadData()
+        }
     }
     
     func sendTextPostToDatabase(_ text: String) {
@@ -187,6 +191,11 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
                 }
         }
         showUploadSuccessAlert()
+        let feedController = FeedViewController()
+        DispatchQueue.main.async {
+            feedController.tableView.reloadData()
+        }
+        
     }
     
     func checkForLoggedInUser() {

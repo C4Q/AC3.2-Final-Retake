@@ -109,14 +109,16 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pIP-1X-lml">
-                                <rect key="frame" x="20" y="8" width="336" height="297"/>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pIP-1X-lml">
+                                <rect key="frame" x="21" y="8" width="334" height="295"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="pIP-1X-lml" secondAttribute="height" multiplier="335:297" constant="1" id="Abe-Bc-qhd"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="297" id="Pnq-ei-YuN"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="297" id="YFU-6x-wA3"/>
-                                    <constraint firstAttribute="height" constant="297" id="hVJ-4C-TLh"/>
+                                    <constraint firstAttribute="width" secondItem="pIP-1X-lml" secondAttribute="height" multiplier="112:99" id="jSv-oQ-w7Y"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="mqF-wk-WPC" appends="YES" id="4cX-e4-8HD"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- or -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8N-uL-OCb">
                                 <rect key="frame" x="150" y="323" width="75" height="21"/>
@@ -140,20 +142,27 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="ouj-1b-EAy" secondAttribute="trailing" constant="42" id="2xw-ER-y6I"/>
                             <constraint firstItem="l8N-uL-OCb" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Auh-6Q-IFg"/>
-                            <constraint firstItem="pIP-1X-lml" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" constant="20" id="CTS-fo-WBR"/>
-                            <constraint firstItem="pIP-1X-lml" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="FmT-Hk-cPy"/>
-                            <constraint firstItem="ouj-1b-EAy" firstAttribute="leading" secondItem="pIP-1X-lml" secondAttribute="trailing" constant="-299" id="NbZ-4t-sS5"/>
-                            <constraint firstAttribute="trailing" secondItem="pIP-1X-lml" secondAttribute="trailing" constant="19" id="RPt-sx-xbU"/>
+                            <constraint firstItem="pIP-1X-lml" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="NYc-Ml-BSc"/>
                             <constraint firstItem="ouj-1b-EAy" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="topMargin" constant="363" id="Rzo-bx-nmO"/>
-                            <constraint firstItem="pIP-1X-lml" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" constant="8" id="erH-VG-Gua"/>
+                            <constraint firstItem="l8N-uL-OCb" firstAttribute="top" secondItem="pIP-1X-lml" secondAttribute="bottom" constant="20" id="iC7-Ww-dIS"/>
+                            <constraint firstItem="pIP-1X-lml" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="topMargin" constant="8" id="iQC-ZK-rv6"/>
                             <constraint firstItem="ouj-1b-EAy" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="k0N-1e-qrg"/>
                             <constraint firstAttribute="bottomMargin" secondItem="ouj-1b-EAy" secondAttribute="bottom" constant="100" id="mEl-XO-JIq"/>
                             <constraint firstItem="l8N-uL-OCb" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="qWk-R2-FI0"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <connections>
+                        <outlet property="postImageView" destination="pIP-1X-lml" id="bBh-qS-mmm"/>
+                        <outlet property="postTextView" destination="ouj-1b-EAy" id="pBt-tO-KZW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="mqF-wk-WPC">
+                    <connections>
+                        <action selector="postImageTapped:" destination="8rJ-Kc-sve" id="Ybm-LK-klY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="359.37031484257875"/>
         </scene>

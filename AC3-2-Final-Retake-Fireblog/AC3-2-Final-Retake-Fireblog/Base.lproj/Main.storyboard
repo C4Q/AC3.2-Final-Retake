@@ -224,7 +224,7 @@
                             </items>
                         </navigationBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" textLabel="iFD-Qd-6Ef" rowHeight="161" style="IBUITableViewCellStyleDefault" id="BFb-Cs-jFF">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" textLabel="iFD-Qd-6Ef" rowHeight="161" style="IBUITableViewCellStyleDefault" id="BFb-Cs-jFF" customClass="blogPostTableViewCell" customModule="AC3_2_Final_Retake_Fireblog" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="375" height="161"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BFb-Cs-jFF" id="rgf-ub-mQ0">
@@ -252,39 +252,9 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="5Yk-Z2-1TN" secondAttribute="trailing" constant="60" id="uEl-G1-Gkk"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="textCell" textLabel="d3p-gR-uue" rowHeight="197" style="IBUITableViewCellStyleDefault" id="L6T-Ev-ET3">
-                                <rect key="frame" x="0.0" y="233" width="375" height="197"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L6T-Ev-ET3" id="qMd-aK-HoH">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="196"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPx-24-S7O">
-                                            <rect key="frame" x="166" y="18" width="199" height="170"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="199" id="LIi-EO-lSP"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <size key="shadowOffset" width="0.0" height="0.0"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d3p-gR-uue">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="196"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="kPx-24-S7O" secondAttribute="trailing" constant="2" id="1pc-mf-fh1"/>
-                                        <constraint firstItem="kPx-24-S7O" firstAttribute="top" secondItem="qMd-aK-HoH" secondAttribute="topMargin" constant="10" id="X3b-fA-Et3"/>
-                                        <constraint firstItem="kPx-24-S7O" firstAttribute="bottom" secondItem="qMd-aK-HoH" secondAttribute="bottomMargin" id="uqf-TK-d7t"/>
-                                    </constraints>
-                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="blogPostImageView" destination="5Yk-Z2-1TN" id="mmd-cq-Kh2"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

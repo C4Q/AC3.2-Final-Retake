@@ -10,7 +10,6 @@ import UIKit
 
 class blogPostTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var blogPostLabel: UILabel!
     @IBOutlet weak var blogPostImageView: UIImageView!
     
     override func awakeFromNib() {

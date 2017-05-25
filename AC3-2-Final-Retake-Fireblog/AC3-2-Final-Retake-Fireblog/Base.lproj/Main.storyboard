@@ -233,7 +233,7 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Yk-Z2-1TN">
                                             <rect key="frame" x="179" y="16" width="128" height="128"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="128" id="zbN-I8-Wip"/>
                                             </constraints>
@@ -246,6 +246,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="5Yk-Z2-1TN" firstAttribute="centerY" secondItem="iFD-Qd-6Ef" secondAttribute="centerY" id="AmN-JO-Cvp"/>
                                         <constraint firstItem="5Yk-Z2-1TN" firstAttribute="top" secondItem="rgf-ub-mQ0" secondAttribute="topMargin" constant="8" id="dNi-a7-Wbg"/>
@@ -256,7 +257,7 @@
                                     <outlet property="blogPostImageView" destination="5Yk-Z2-1TN" id="mmd-cq-Kh2"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" textLabel="xhd-3u-QQk" rowHeight="161" style="IBUITableViewCellStyleDefault" id="LP8-ZD-ksf" userLabel="textCell" customClass="blogPostTextTableViewCell" customModule="AC3_2_Final_Retake_Fireblog" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="textCell" textLabel="xhd-3u-QQk" rowHeight="161" style="IBUITableViewCellStyleDefault" id="LP8-ZD-ksf" userLabel="textCell" customClass="blogPostTextTableViewCell" customModule="AC3_2_Final_Retake_Fireblog" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="233" width="375" height="161"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LP8-ZD-ksf" id="aRj-c6-5Ce">
@@ -266,6 +267,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSH-RM-lme">
                                             <rect key="frame" x="166" y="8" width="183" height="144"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>

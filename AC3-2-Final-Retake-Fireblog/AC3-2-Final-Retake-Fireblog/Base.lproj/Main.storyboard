@@ -281,6 +281,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="blogTextLabel" destination="TSH-RM-lme" id="WEZ-fs-75S"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

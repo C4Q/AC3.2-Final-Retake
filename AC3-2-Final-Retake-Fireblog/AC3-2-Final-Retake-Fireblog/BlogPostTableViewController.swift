@@ -70,29 +70,39 @@ class BlogPostTableViewController: UITableViewController {
         return blogPosts.count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! blogPostTableViewCell
         let post = blogPosts[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! blogPostTextTableViewCell
+        if post.type == "text" {
+            
+        cell.blogTextLabel?.text = post.text
         
-        cell.blogPostImageView.image = nil
-        cell.detailTextLabel?.text = post.type
-        
-        let storage = FIRStorage.storage()
-        let storageRef = storage.reference()
-        let spaceRef = storageRef.child("images/\(post.postId)")
-        spaceRef.data(withMaxSize: 1 * 1024 * 1024) { data, error in
-            if let error = error {
-                print(error)
-            } else {
-                //if cell == tableView.cellForRow(at: indexPath) {
-                let image = UIImage(data: data!)
-                cell.blogPostImageView.image = image
-                //}
-            }
         }
         return cell
     }
+    
+        
+//        if post.type == "image/jpeg" {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! blogPostTableViewCell
+//            
+//            cell.blogPostImageView.image = nil
+//            cell.detailTextLabel?.text = post.type
+//            
+//            let storage = FIRStorage.storage()
+//            let storageRef = storage.reference()
+//            let spaceRef = storageRef.child("images/\(post.postId)")
+//            spaceRef.data(withMaxSize: 1 * 1024 * 1024) { data, error in
+//                if let error = error {
+//                    print(error)
+//                } else {
+//                    //if cell == tableView.cellForRow(at: indexPath) {
+//                    let image = UIImage(data: data!)
+//                    cell.blogPostImageView.image = image
+//                    //}
+//                }
+//            }
+//            return cell
+//        }
     
     @IBAction func logOutBarButtonTapped(_ sender: UIBarButtonItem) {
         do {

@@ -121,19 +121,40 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrr-JP-pRd">
+                                <rect key="frame" x="92" y="135" width="42" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QAX-SL-3gc"/>
+                                </constraints>
+                                <state key="normal" title="Log In"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5m-uf-2t2">
+                                <rect key="frame" x="226" y="135" width="57" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="foF-EW-gHk"/>
+                                </constraints>
+                                <state key="normal" title="Register"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="E5m-uf-2t2" secondAttribute="trailing" constant="76" id="2wA-u1-g0d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6up-6u-8cJ" secondAttribute="trailing" constant="20" id="2xX-Kd-4E8"/>
+                            <constraint firstItem="nrr-JP-pRd" firstAttribute="leading" secondItem="Dsp-jC-Ilw" secondAttribute="leadingMargin" constant="76" id="5SD-Qr-3aP"/>
                             <constraint firstItem="6up-6u-8cJ" firstAttribute="top" secondItem="OuB-bR-BIq" secondAttribute="bottom" constant="8" id="6JE-0Y-EaR"/>
                             <constraint firstItem="6up-6u-8cJ" firstAttribute="leading" secondItem="Dsp-jC-Ilw" secondAttribute="leadingMargin" constant="20" id="9Tj-I3-TKQ"/>
                             <constraint firstItem="OuB-bR-BIq" firstAttribute="leading" secondItem="Dsp-jC-Ilw" secondAttribute="leadingMargin" constant="20" id="9UE-zw-Rjz"/>
                             <constraint firstItem="OuB-bR-BIq" firstAttribute="top" secondItem="ceT-UY-4aH" secondAttribute="bottom" constant="39" id="D1V-cw-FBd"/>
+                            <constraint firstItem="E5m-uf-2t2" firstAttribute="top" secondItem="6up-6u-8cJ" secondAttribute="bottom" constant="8" id="HID-eJ-9CQ"/>
                             <constraint firstItem="6up-6u-8cJ" firstAttribute="centerX" secondItem="Dsp-jC-Ilw" secondAttribute="centerX" id="IoC-Yh-8yN"/>
                             <constraint firstItem="iSD-mG-gNi" firstAttribute="top" secondItem="6up-6u-8cJ" secondAttribute="bottom" constant="540" id="MWk-il-01Z"/>
                             <constraint firstItem="OuB-bR-BIq" firstAttribute="centerX" secondItem="Dsp-jC-Ilw" secondAttribute="centerX" id="OdR-24-k8P"/>
+                            <constraint firstItem="nrr-JP-pRd" firstAttribute="top" secondItem="6up-6u-8cJ" secondAttribute="bottom" constant="8" id="WLH-k2-byd"/>
+                            <constraint firstItem="iSD-mG-gNi" firstAttribute="top" secondItem="nrr-JP-pRd" secondAttribute="bottom" constant="502" id="YiG-JO-pKb"/>
+                            <constraint firstItem="E5m-uf-2t2" firstAttribute="leading" secondItem="nrr-JP-pRd" secondAttribute="trailing" constant="92" id="bAK-4U-Wul"/>
                             <constraint firstItem="iSD-mG-gNi" firstAttribute="top" secondItem="OuB-bR-BIq" secondAttribute="bottom" constant="578" id="p1e-vT-bV8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OuB-bR-BIq" secondAttribute="trailing" constant="20" id="t8J-AS-Xag"/>
+                            <constraint firstItem="iSD-mG-gNi" firstAttribute="top" secondItem="E5m-uf-2t2" secondAttribute="bottom" constant="502" id="xsV-Wp-Hak"/>
                         </constraints>
                     </view>
                 </viewController>

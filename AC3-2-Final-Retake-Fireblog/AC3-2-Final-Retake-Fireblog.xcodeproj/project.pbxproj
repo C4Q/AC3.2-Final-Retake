@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1E3BD1751E9FB52F00690EEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BD1741E9FB52F00690EEB /* AppDelegate.swift */; };
-		1E3BD1771E9FB52F00690EEB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BD1761E9FB52F00690EEB /* FirstViewController.swift */; };
 		1E3BD1791E9FB52F00690EEB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BD1781E9FB52F00690EEB /* SecondViewController.swift */; };
 		1E3BD17C1E9FB52F00690EEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BD17A1E9FB52F00690EEB /* Main.storyboard */; };
 		1E3BD17E1E9FB52F00690EEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BD17D1E9FB52F00690EEB /* Assets.xcassets */; };
@@ -18,12 +17,12 @@
 		81D301561ED729D8002376C9 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D301551ED729D8002376C9 /* LogInViewController.swift */; };
 		81D301581ED73C21002376C9 /* BlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D301571ED73C21002376C9 /* BlogPost.swift */; };
 		81D3015A1ED76777002376C9 /* blogPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D301591ED76777002376C9 /* blogPostTableViewCell.swift */; };
+		81D3015C1ED7754E002376C9 /* BlogPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D3015B1ED7754E002376C9 /* BlogPostTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1E3BD1711E9FB52F00690EEB /* AC3-2-Final-Retake-Fireblog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AC3-2-Final-Retake-Fireblog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E3BD1741E9FB52F00690EEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1E3BD1761E9FB52F00690EEB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		1E3BD1781E9FB52F00690EEB /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		1E3BD17B1E9FB52F00690EEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1E3BD17D1E9FB52F00690EEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -34,6 +33,7 @@
 		81D301551ED729D8002376C9 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		81D301571ED73C21002376C9 /* BlogPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
 		81D301591ED76777002376C9 /* blogPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = blogPostTableViewCell.swift; sourceTree = "<group>"; };
+		81D3015B1ED7754E002376C9 /* BlogPostTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogPostTableViewController.swift; sourceTree = "<group>"; };
 		8DF390965915B6D28B9BC94E /* Pods-AC3-2-Final-Retake-Fireblog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3-2-Final-Retake-Fireblog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AC3-2-Final-Retake-Fireblog/Pods-AC3-2-Final-Retake-Fireblog.debug.xcconfig"; sourceTree = "<group>"; };
 		AC99124C653DF8A077A82073 /* Pods-AC3-2-Final-Retake-Fireblog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3-2-Final-Retake-Fireblog.release.xcconfig"; path = "Pods/Target Support Files/Pods-AC3-2-Final-Retake-Fireblog/Pods-AC3-2-Final-Retake-Fireblog.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,10 +72,10 @@
 			isa = PBXGroup;
 			children = (
 				1E3BD1741E9FB52F00690EEB /* AppDelegate.swift */,
-				1E3BD1761E9FB52F00690EEB /* FirstViewController.swift */,
 				81D301571ED73C21002376C9 /* BlogPost.swift */,
 				1E3BD1781E9FB52F00690EEB /* SecondViewController.swift */,
 				1E3BD17A1E9FB52F00690EEB /* Main.storyboard */,
+				81D3015B1ED7754E002376C9 /* BlogPostTableViewController.swift */,
 				81D301551ED729D8002376C9 /* LogInViewController.swift */,
 				1E3BD17D1E9FB52F00690EEB /* Assets.xcassets */,
 				1E3BD17F1E9FB52F00690EEB /* LaunchScreen.storyboard */,
@@ -232,7 +232,7 @@
 				81D301561ED729D8002376C9 /* LogInViewController.swift in Sources */,
 				1E3BD1791E9FB52F00690EEB /* SecondViewController.swift in Sources */,
 				1E3BD1751E9FB52F00690EEB /* AppDelegate.swift in Sources */,
-				1E3BD1771E9FB52F00690EEB /* FirstViewController.swift in Sources */,
+				81D3015C1ED7754E002376C9 /* BlogPostTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

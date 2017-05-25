@@ -7,19 +7,31 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseStorage
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UIImagePickerControllerDelegate, UITextViewDelegate {
+    var selectedImage: UIImage?
+    var databaseReference: FIRDatabaseReference!
 
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var postTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.databaseReference = FIRDatabase.database().reference().child("posts")
+        setTextView()
     }
 
     @IBAction func postImageTapped(_ sender: UITapGestureRecognizer) {
-    print("Image Tapped")
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        self.present(imagePickerController, animated: true, completion: nil)
     }
 
+    func setTextView() {
+        postTextView.delegate = self
+    }
 }
+
 

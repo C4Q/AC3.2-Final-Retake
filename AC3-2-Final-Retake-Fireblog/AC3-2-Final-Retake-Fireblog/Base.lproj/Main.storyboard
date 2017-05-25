@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -109,17 +108,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pIP-1X-lml">
-                                <rect key="frame" x="21" y="8" width="334" height="295"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="pIP-1X-lml" secondAttribute="height" multiplier="112:99" id="jSv-oQ-w7Y"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="mqF-wk-WPC" appends="YES" id="4cX-e4-8HD"/>
-                                </connections>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- or -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8N-uL-OCb">
                                 <rect key="frame" x="150" y="323" width="75" height="21"/>
                                 <constraints>
@@ -137,15 +125,39 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rnk-kH-BUV">
+                                <rect key="frame" x="1" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="fS2-UM-rya">
+                                        <barButtonItem key="rightBarButtonItem" title="Post" id="cii-ke-jkk">
+                                            <connections>
+                                                <action selector="postBarButtonTapped:" destination="8rJ-Kc-sve" id="aS7-u9-h4h"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pIP-1X-lml">
+                                <rect key="frame" x="75.5" y="79" width="224" height="224"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="224" id="KsW-Wu-ioV"/>
+                                    <constraint firstAttribute="width" constant="224" id="qis-61-kf5"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="mqF-wk-WPC" appends="YES" id="4cX-e4-8HD"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="ouj-1b-EAy" secondAttribute="trailing" constant="42" id="2xw-ER-y6I"/>
                             <constraint firstItem="l8N-uL-OCb" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Auh-6Q-IFg"/>
-                            <constraint firstItem="pIP-1X-lml" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="NYc-Ml-BSc"/>
                             <constraint firstItem="ouj-1b-EAy" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="topMargin" constant="363" id="Rzo-bx-nmO"/>
-                            <constraint firstItem="l8N-uL-OCb" firstAttribute="top" secondItem="pIP-1X-lml" secondAttribute="bottom" constant="20" id="iC7-Ww-dIS"/>
-                            <constraint firstItem="pIP-1X-lml" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="topMargin" constant="8" id="iQC-ZK-rv6"/>
+                            <constraint firstItem="pIP-1X-lml" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Sjs-WY-glG"/>
+                            <constraint firstItem="l8N-uL-OCb" firstAttribute="top" secondItem="pIP-1X-lml" secondAttribute="bottom" constant="20" id="iah-y4-ECR"/>
                             <constraint firstItem="ouj-1b-EAy" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="k0N-1e-qrg"/>
                             <constraint firstAttribute="bottomMargin" secondItem="ouj-1b-EAy" secondAttribute="bottom" constant="100" id="mEl-XO-JIq"/>
                             <constraint firstItem="l8N-uL-OCb" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="qWk-R2-FI0"/>
@@ -153,6 +165,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="postBarButton" destination="cii-ke-jkk" id="2Ga-8F-7ML"/>
                         <outlet property="postImageView" destination="pIP-1X-lml" id="bBh-qS-mmm"/>
                         <outlet property="postTextView" destination="ouj-1b-EAy" id="pBt-tO-KZW"/>
                     </connections>

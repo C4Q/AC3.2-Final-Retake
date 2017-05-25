@@ -12,6 +12,7 @@ import FirebaseStorage
 
 class SecondViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     var selectedImage: UIImage?
+    var selectedText: String?
     var databaseReference: FIRDatabaseReference!
 
     @IBOutlet weak var postBarButton: UIBarButtonItem!
@@ -23,8 +24,12 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
         setTextView()
     }
     @IBAction func postBarButtonTapped(_ sender: UIBarButtonItem) {
-    print("Post button tapped")
-    }
+    let postImage = selectedImage
+    let postText = postTextView.text
+        if postImage == nil && postText == "" {
+                self.showOKAlert(title: "Nothing to Post", message: "Please enter a photo OR text to post")
+            }
+        }
 
     @IBAction func postImageTapped(_ sender: UITapGestureRecognizer) {
         let imagePickerController = UIImagePickerController()
@@ -45,6 +50,18 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     func setTextView() {
         postTextView.delegate = self
+    }
+    //MARK: - Helper Functions
+    
+    func showOKAlert(title: String, message: String?, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .cancel) { (_) in
+            if let completionAction = completion {
+                completionAction()
+            }
+        }
+        alert.addAction(okayAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

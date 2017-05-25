@@ -14,12 +14,14 @@ class BlogPost {
     internal var timestamp: NSNumber
     internal var type: String?
     internal var userId: String?
+    internal var postId: String?
     
-    init(email: String?, text: String?, timestamp: NSNumber, type: String?, userId: String?) {
+    init(email: String?, text: String?, timestamp: NSNumber, type: String?, userId: String?, postId: String?) {
         self.email = email
         self.text = text
         self.timestamp = timestamp
         self.type = type
         self.userId = userId
+        self.postId = postId
     }
 }

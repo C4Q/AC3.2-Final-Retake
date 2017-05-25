@@ -17,6 +17,7 @@
 		7FD98143E2C8A73ADCA53FC5 /* Pods_AC3_2_Final_Retake_Fireblog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F68DDAE78396FFCADF770A4 /* Pods_AC3_2_Final_Retake_Fireblog.framework */; };
 		81D301561ED729D8002376C9 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D301551ED729D8002376C9 /* LogInViewController.swift */; };
 		81D301581ED73C21002376C9 /* BlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D301571ED73C21002376C9 /* BlogPost.swift */; };
+		81D3015A1ED76777002376C9 /* blogPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D301591ED76777002376C9 /* blogPostTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		2F68DDAE78396FFCADF770A4 /* Pods_AC3_2_Final_Retake_Fireblog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AC3_2_Final_Retake_Fireblog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81D301551ED729D8002376C9 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		81D301571ED73C21002376C9 /* BlogPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
+		81D301591ED76777002376C9 /* blogPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = blogPostTableViewCell.swift; sourceTree = "<group>"; };
 		8DF390965915B6D28B9BC94E /* Pods-AC3-2-Final-Retake-Fireblog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3-2-Final-Retake-Fireblog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AC3-2-Final-Retake-Fireblog/Pods-AC3-2-Final-Retake-Fireblog.debug.xcconfig"; sourceTree = "<group>"; };
 		AC99124C653DF8A077A82073 /* Pods-AC3-2-Final-Retake-Fireblog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC3-2-Final-Retake-Fireblog.release.xcconfig"; path = "Pods/Target Support Files/Pods-AC3-2-Final-Retake-Fireblog/Pods-AC3-2-Final-Retake-Fireblog.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +81,7 @@
 				1E3BD17F1E9FB52F00690EEB /* LaunchScreen.storyboard */,
 				1E3BD1881E9FB57900690EEB /* GoogleService-Info.plist */,
 				1E3BD1821E9FB52F00690EEB /* Info.plist */,
+				81D301591ED76777002376C9 /* blogPostTableViewCell.swift */,
 			);
 			path = "AC3-2-Final-Retake-Fireblog";
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81D301581ED73C21002376C9 /* BlogPost.swift in Sources */,
+				81D3015A1ED76777002376C9 /* blogPostTableViewCell.swift in Sources */,
 				81D301561ED729D8002376C9 /* LogInViewController.swift in Sources */,
 				1E3BD1791E9FB52F00690EEB /* SecondViewController.swift in Sources */,
 				1E3BD1751E9FB52F00690EEB /* AppDelegate.swift in Sources */,

@@ -37,11 +37,12 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
             //post as text post
             let postRef = self.databaseReference.childByAutoId()
             let timeStamp = NSNumber(value: Int(NSDate().timeIntervalSince1970))
-            let post = BlogPost(email: email, text: postText, timestamp: timeStamp, type: "Text", userId: email)
+            let post = BlogPost(email: email, text: postText, timestamp: timeStamp, type: "Text", userId: email, postId: postRef.key)
             let postDict = ["email": post.email,
                             "text": post.text,
                             "timestamp": post.timestamp,
                             "type": post.type,
+                            "postId": post.postId,
                             "userId": post.userId] as [String : Any]
             
             postRef.setValue(postDict, withCompletionBlock: { (error, reference) in
@@ -72,13 +73,14 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
                         print("Error putting image to storage")
                     }
                 })
-                let post = BlogPost(email: (FIRAuth.auth()?.currentUser?.uid)!, text: "", timestamp: timeStamp, type: "image/jpeg", userId: (FIRAuth.auth()?.currentUser?.uid)!)
+                let post = BlogPost(email: (FIRAuth.auth()?.currentUser?.uid)!, text: "", timestamp: timeStamp, type: "image/jpeg", userId: (FIRAuth.auth()?.currentUser?.uid)!, postId: postRef.key)
                 
-                let postDict = ["email": post.email,
+                let postDict = ["email": post.email!,
                                 "text": post.text,
                                 "timestamp": post.timestamp,
                                 "type": post.type,
-                                "userId": post.userId] as [String : Any]
+                                "userId": post.userId,
+                                "postId": post.postId] as [String : Any]
                 
                 postRef.setValue(postDict, withCompletionBlock: { (error, reference) in
                     if let error = error {

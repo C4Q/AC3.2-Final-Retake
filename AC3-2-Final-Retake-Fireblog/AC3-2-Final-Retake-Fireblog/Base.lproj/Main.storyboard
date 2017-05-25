@@ -111,7 +111,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6up-6u-8cJ" userLabel="Email Text Field">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6up-6u-8cJ" userLabel="Password Text Field">
                                 <rect key="frame" x="36" y="97" width="303" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Prq-9j-r2Q"/>
@@ -127,6 +127,9 @@
                                     <constraint firstAttribute="height" constant="30" id="QAX-SL-3gc"/>
                                 </constraints>
                                 <state key="normal" title="Log In"/>
+                                <connections>
+                                    <action selector="logInButtonTapped:" destination="8mT-cx-Tdh" eventType="touchUpInside" id="FgR-yd-IlY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5m-uf-2t2">
                                 <rect key="frame" x="226" y="135" width="57" height="30"/>
@@ -134,6 +137,9 @@
                                     <constraint firstAttribute="height" constant="30" id="foF-EW-gHk"/>
                                 </constraints>
                                 <state key="normal" title="Register"/>
+                                <connections>
+                                    <action selector="registerButton:" destination="8mT-cx-Tdh" eventType="touchUpInside" id="DA0-Zy-b4u"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -157,6 +163,12 @@
                             <constraint firstItem="iSD-mG-gNi" firstAttribute="top" secondItem="E5m-uf-2t2" secondAttribute="bottom" constant="502" id="xsV-Wp-Hak"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="OuB-bR-BIq" id="nUl-PZ-8aO"/>
+                        <outlet property="logInButton" destination="nrr-JP-pRd" id="bEu-Rf-wTH"/>
+                        <outlet property="passwordTextField" destination="6up-6u-8cJ" id="9nA-KA-dG7"/>
+                        <outlet property="registerButton" destination="E5m-uf-2t2" id="oLh-dq-rR4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDB-Wl-xlD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

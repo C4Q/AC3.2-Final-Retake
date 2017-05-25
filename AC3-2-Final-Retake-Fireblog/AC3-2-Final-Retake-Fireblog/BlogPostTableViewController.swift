@@ -42,13 +42,14 @@ class BlogPostTableViewController: UITableViewController {
             
             for child in snapshot.children {
                 if let snap = child as? FIRDataSnapshot, let valueDict = snap.value as? [String: AnyObject] {
-                    if let text = valueDict["text"] as? String {
+                    if let text = valueDict["text"] as? String,
+                        let type = valueDict["type"] as? String{
 //                        let userId = valueDict["userId"] as? String,
 //                        let timestamp = valueDict["timestamp"] as? NSNumber,
 //                        let email = valueDict["email"] as? String,
 //                        let postId = valueDict["postId"] as? String,
 //                        let type = valueDict["type"] as? String {
-                        let post = BlogPost(email: "test", text: text, timestamp: 123, type: "test", userId: "test", postId: "test")
+                        let post = BlogPost(email: "test", text: text, timestamp: 123, type: type, userId: "test", postId: "test")
                         gottenPosts.append(post)
                     }
                 }
@@ -75,8 +76,7 @@ class BlogPostTableViewController: UITableViewController {
         let post = blogPosts[indexPath.row]
         
         cell.blogPostImageView.image = nil
-        //cell.blogPostLabel.text = post.text
-        //cell.blogPostLabel.numberOfLines = 0
+        cell.detailTextLabel?.text = post.type
         
         let storage = FIRStorage.storage()
         let storageRef = storage.reference()

@@ -24,6 +24,25 @@ class LogInViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBAction func logInButtonTapped(_ sender: UIButton) {
+        if let username = emailTextField.text,
+            let password = passwordTextField.text {
+            logInButton.isEnabled = false
+            FIRAuth.auth()?.signIn(withEmail: username, password: password, completion: { (user: FIRUser?, error: Error?) in
+                if error != nil  {
+                    print("Error \(error)")
+                }
+                if user != nil {
+                    print("Success")
+                    self.showOKAlert(title: "Log In Successful", message: nil) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                } else {
+                    self.showOKAlert(title: "Log In Failed", message: error?.localizedDescription)
+                }
+                self.logInButton.isEnabled = true
+            })
+        }
+        
     }
 
     @IBAction func registerButton(_ sender: UIButton) {

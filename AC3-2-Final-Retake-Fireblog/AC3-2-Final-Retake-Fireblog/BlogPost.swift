@@ -11,11 +11,11 @@ import Foundation
 class BlogPost {
     internal var email: String?
     internal var text: String?
-    internal var timestamp: Date
+    internal var timestamp: NSNumber
     internal var type: String?
     internal var userId: String?
     
-    init(email: String?, text: String?, timestamp: Date, type: String?, userId: String?) {
+    init(email: String?, text: String?, timestamp: NSNumber, type: String?, userId: String?) {
         self.email = email
         self.text = text
         self.timestamp = timestamp

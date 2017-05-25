@@ -36,7 +36,8 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
         if postImage == nil && postText != "" {
             //post as text post
             let postRef = self.databaseReference.childByAutoId()
-            let post = BlogPost(email: email, text: postText, timestamp: Date.init(), type: "Text", userId: email)
+            let timeStamp = NSNumber(value: Int(NSDate().timeIntervalSince1970))
+            let post = BlogPost(email: email, text: postText, timestamp: timeStamp, type: "Text", userId: email)
             let postDict = ["email": post.email,
                             "text": post.text,
                             "timestamp": post.timestamp,
@@ -49,11 +50,14 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
                 }
                 else {
                     print(reference)
-                    self.showOKAlert(title: "Success!", message: "Photo Uploaded to Meatly Successfuly", completion: nil)
+                    self.showOKAlert(title: "Success!", message: "Blog Post Uploaded Successfuly", completion: nil)
                     }
                 })
             }
+        if postImage != nil && postText != nil {
+            self.showOKAlert(title: "Too much to Post", message: "Please enter a photo OR text to post, not both")
         }
+    }
         
 
     @IBAction func postImageTapped(_ sender: UITapGestureRecognizer) {

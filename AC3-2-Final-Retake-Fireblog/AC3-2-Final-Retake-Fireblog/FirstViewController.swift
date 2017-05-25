@@ -7,17 +7,24 @@
 //
 
 import UIKit
+import FirebaseStorage
+import FirebaseDatabase
 
 class FirstViewController: UIViewController {
-
+var loggedIn: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidAppear(_ animated: Bool) {
+        if !loggedIn {
+            loggedIn = true
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyBoard.instantiateViewController(withIdentifier: "logInViewController")
+            self.present(loginVC, animated: false, completion: nil)
+        }
     }
 
 

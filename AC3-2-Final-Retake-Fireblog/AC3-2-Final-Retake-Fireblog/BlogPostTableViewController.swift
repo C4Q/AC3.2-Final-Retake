@@ -58,6 +58,17 @@ class BlogPostTableViewController: UITableViewController {
             self.tableView.reloadData()
         })
     }
+    @IBAction func logOutBarButtonTapped(_ sender: UIBarButtonItem) {
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch {
+            print(error)
+        }
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "LogInViewController")
+        self.present(vc, animated: true, completion: nil)
+        return
+    }
     
     
     // MARK: - Table view data source
@@ -71,132 +82,39 @@ class BlogPostTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let post = blogPosts[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! blogPostTextTableViewCell
-        if post.type == "text" {
-            
-        cell.blogTextLabel?.text = post.text
-        
+        if indexPath.section == 0 {
+            let post = blogPosts[indexPath.row]
+            if post.type == "text" {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! blogPostTextTableViewCell
+                cell.blogTextLabel?.text = post.text
+                cell.detailTextLabel?.text = post.email
+                return cell
+            } else {
+                if post.type != "text" {
+                    let cellImage = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! blogPostTableViewCell
+                    cellImage.blogPostImageView.image = nil
+                    cellImage.detailTextLabel?.text = post.email
+                    
+                    let storage = FIRStorage.storage()
+                    let storageRef = storage.reference()
+                    let spaceRef = storageRef.child("images/\(post.postId)")
+                    spaceRef.data(withMaxSize: 1 * 1024 * 1024) { data, error in
+                        if let error = error {
+                            print(error)
+                        } else {
+                            //if cell == tableView.cellForRow(at: indexPath) {
+                            let image = UIImage(data: data!)
+                            cellImage.blogPostImageView.image = image
+                            //}
+                        }
+                    }
+                    return cellImage
+                }
+                
+            }
         }
-        return cell
-    }
-    
-        
-//        if post.type == "image/jpeg" {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! blogPostTableViewCell
-//            
-//            cell.blogPostImageView.image = nil
-//            cell.detailTextLabel?.text = post.type
-//            
-//            let storage = FIRStorage.storage()
-//            let storageRef = storage.reference()
-//            let spaceRef = storageRef.child("images/\(post.postId)")
-//            spaceRef.data(withMaxSize: 1 * 1024 * 1024) { data, error in
-//                if let error = error {
-//                    print(error)
-//                } else {
-//                    //if cell == tableView.cellForRow(at: indexPath) {
-//                    let image = UIImage(data: data!)
-//                    cell.blogPostImageView.image = image
-//                    //}
-//                }
-//            }
-//            return cell
-//        }
-    
-    @IBAction func logOutBarButtonTapped(_ sender: UIBarButtonItem) {
-        do {
-            try FIRAuth.auth()?.signOut()
-        } catch {
-            print(error)
-        }
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "LogInViewController")
-        self.present(vc, animated: true, completion: nil)
-        return
+        return blogPostTableViewCell()
+        //not sure how to get the cells to return properly yet: 5:53pm
+    //referenced stack overflow here: https://stackoverflow.com/questions/35353737/multiple-prototype-cells-into-uitableview for how to do multiple prototype cells
     }
 }
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        // Uncomment the following line to preserve selection between presentations
-//        // self.clearsSelectionOnViewWillAppear = false
-//
-//        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-//    }
-//
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
-//
-//    // MARK: - Table view data source
-//
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-//
-//    /*
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-//
-//        // Configure the cell...
-//
-//        return cell
-//    }
-//    */
-//
-//    /*
-//    // Override to support conditional editing of the table view.
-//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        // Return false if you do not want the specified item to be editable.
-//        return true
-//    }
-//    */
-//
-//    /*
-//    // Override to support editing the table view.
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            // Delete the row from the data source
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        } else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }    
-//    }
-//    */
-//
-//    /*
-//    // Override to support rearranging the table view.
-//    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-//
-//    }
-//    */
-//
-//    /*
-//    // Override to support conditional rearranging of the table view.
-//    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-//        // Return false if you do not want the item to be re-orderable.
-//        return true
-//    }
-//    */
-//
-//    /*
-//    // MARK: - Navigation
-//
-//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//    }
-//    */
-//
-//}

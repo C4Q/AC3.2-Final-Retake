@@ -9,24 +9,35 @@
 import UIKit
 import FirebaseStorage
 import FirebaseDatabase
+import FirebaseAuth
 
 class FirstViewController: UIViewController {
 var loggedIn: Bool = false
     
+    @IBOutlet weak var logOutBarButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func viewDidAppear(_ animated: Bool) {
         if !loggedIn {
             loggedIn = true
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let loginVC = storyBoard.instantiateViewController(withIdentifier: "logInViewController")
+            let loginVC = storyBoard.instantiateViewController(withIdentifier: "LogInViewController")
             self.present(loginVC, animated: false, completion: nil)
         }
     }
 
-
+    @IBAction func logOutBarButtonTapped(_ sender: UIBarButtonItem) {
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch {
+            print(error)
+        }
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "LogInViewController")
+        self.present(vc, animated: true, completion: nil)
+        return
+    }
 }
 

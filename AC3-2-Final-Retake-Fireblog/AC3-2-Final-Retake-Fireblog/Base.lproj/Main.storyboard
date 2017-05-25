@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--First-->
+        <!--Feed-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="AC3_2_Final_Retake_Fireblog" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Feed" id="9pv-A4-QxB" customClass="FirstViewController" customModule="AC3_2_Final_Retake_Fireblog" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Mf-7Q-0H1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="finalRetakeCell" id="T9b-DF-2Bb">
@@ -49,15 +49,28 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mvw-6R-XOJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="pRO-Yz-JFx">
+                                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="jr4-Cj-een">
+                                            <connections>
+                                                <action selector="logOutBarButtonTapped:" destination="9pv-A4-QxB" id="gPM-BI-bYU"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="8Mf-7Q-0H1" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="1hZ-kj-zp5"/>
                             <constraint firstItem="8Mf-7Q-0H1" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="2GA-hW-vEf"/>
                             <constraint firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="6BV-lF-sBN"/>
-                            <constraint firstItem="8Mf-7Q-0H1" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="Db1-6g-4A0"/>
-                            <constraint firstItem="8Mf-7Q-0H1" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="ELM-uz-UMZ"/>
-                            <constraint firstItem="8Mf-7Q-0H1" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="LFS-Js-WeW"/>
+                            <constraint firstItem="8Mf-7Q-0H1" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="44" id="Db1-6g-4A0"/>
+                            <constraint firstItem="8Mf-7Q-0H1" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="44" id="ELM-uz-UMZ"/>
+                            <constraint firstItem="8Mf-7Q-0H1" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" constant="22" id="LFS-Js-WeW"/>
                             <constraint firstAttribute="bottom" secondItem="8Mf-7Q-0H1" secondAttribute="bottom" id="WaW-RU-Giv"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" symbolic="YES" id="cfb-er-3JN"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="e1l-AV-tCB"/>
@@ -68,10 +81,13 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="logOutBarButton" destination="jr4-Cj-een" id="uEf-pn-iwV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="749.60000000000002" y="-326.08695652173918"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
@@ -116,7 +132,7 @@
         <!--Log In View Controller-->
         <scene sceneID="ZA9-fb-96r">
             <objects>
-                <viewController storyboardIdentifier="logInViewController" id="8mT-cx-Tdh" customClass="LogInViewController" customModule="AC3_2_Final_Retake_Fireblog" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LogInViewController" id="8mT-cx-Tdh" customClass="LogInViewController" customModule="AC3_2_Final_Retake_Fireblog" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ceT-UY-4aH"/>
                         <viewControllerLayoutGuide type="bottom" id="iSD-mG-gNi"/>
